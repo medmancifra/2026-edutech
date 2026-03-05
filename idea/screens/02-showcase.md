@@ -1,0 +1,157 @@
+# Screen: Showcase (Витрина)
+
+## Main Showcase Screen
+
+```
+┌─────────────────────────────────┐
+│  AnimaLearn          🔔  👤     │  ← App bar
+│                                 │
+│  ┌─────────────────────────┐   │
+│  │ 🔍 Search courses...    │   │  ← Search bar
+│  └─────────────────────────┘   │
+│                                 │
+│  ── Featured ──────────────── ▶│  ← Horizontal scroll section
+│  ┌──────────────────────────┐  │
+│  │                           │  │
+│  │  [Animated Banner]        │  │  ← Hero course banner
+│  │  Learn Python in 1 Hour  │  │    with Lottie animation
+│  │  ⭐ 4.9  •  60 min  Free │  │
+│  │  [▶ Start Learning]       │  │
+│  └──────────────────────────┘  │
+│                                 │
+│  ── Categories ────────────────│
+│  [All] [Python] [JS] [Data] ...│  ← Filter chips (horizontal)
+│                                 │
+│  ── Popular Now ───────────────│
+│  ┌──────────┐ ┌──────────┐    │
+│  │[Thumbnail│ │[Thumbnail│    │  ← 2-column course grid
+│  │ Python   │ │ React    │    │    (StaggeredGridView)
+│  │ 60 min   │ │ 45 min   │    │
+│  │ ⭐4.9    │ │ ⭐4.7    │    │
+│  └──────────┘ └──────────┘    │
+│                                 │
+│  ┌──────────┐ ┌──────────┐    │
+│  │[Thumbnail│ │[Thumbnail│    │
+│  │ Git Intro│ │ SQL Basics│   │
+│  │ 30 min   │ │ 50 min   │    │
+│  └──────────┘ └──────────┘    │
+│                                 │
+│  ── New This Week ─────────────│
+│  [Same grid continues...]       │
+│                                 │
+│  ┌───────────────────────────┐ │
+│  │           🔒              │ │  ← Upgrade prompt (for free users)
+│  │    Unlock Pro Courses     │ │
+│  │   [Upgrade to Creator]    │ │
+│  └───────────────────────────┘ │
+│                                 │
+│  [Showcase] [Learn] [+] [Me]   │  ← Bottom navigation
+└─────────────────────────────────┘
+```
+
+---
+
+## Course Card Component
+
+```
+┌─────────────────────┐
+│  [Thumbnail Image]  │  ← Course thumbnail (16:9 ratio)
+│  ┌──────────────┐   │  ← Duration badge overlay
+│  │  60 min      │   │
+│  └──────────────┘   │
+├─────────────────────┤
+│ Learn Python in 1h  │  ← Course title (max 2 lines)
+│ by @codetutorials   │  ← Creator name with avatar
+│ ⭐ 4.9 (1.2k)       │  ← Rating
+│ [Python] [Beginner] │  ← Tags
+└─────────────────────┘
+```
+
+---
+
+## Course Detail Screen
+
+```
+┌─────────────────────────────────┐
+│  ←                    ⤴ Share  │
+│                                 │
+│  ████████████████████████████   │  ← Course hero image
+│  █                          █  │    (16:9, animated preview on tap)
+│  █    [▶ 30s Preview]       █  │
+│  ████████████████████████████   │
+│                                 │
+│  Learn Python in 1 Hour         │  ← Title
+│  ⭐ 4.9 (1,234 reviews)         │  ← Rating
+│                                 │
+│  👤 Alex Thompson    ✓ Verified │  ← Creator info
+│                                 │
+│  📊 Beginner  ⏱ 60 min  🎯 10 │  ← Stats (level, duration, modules)
+│                                 │
+│  About this course              │
+│  Learn Python from scratch with │
+│  animated explanations...       │
+│                                 │
+│  What you'll learn              │
+│  ✅ Variables & Data Types      │
+│  ✅ Control Flow (if/else)      │
+│  ✅ Functions & Modules         │
+│  ✅ A mini project              │
+│                                 │
+│  ── 10 Modules ────────────────│
+│  ┌─────────────────────────┐   │
+│  │ 1  What is Python?  3min│   │  ← Module list
+│  │ 2  Variables        8min│   │
+│  │ 3  Operators        5min│   │
+│  │ ...                     │   │
+│  └─────────────────────────┘   │
+│                                 │
+│  ┌─────────────────────────┐   │
+│  │   ▶  Start Learning     │   │  ← Primary CTA
+│  └─────────────────────────┘   │
+└─────────────────────────────────┘
+```
+
+---
+
+## Search Screen
+
+```
+┌─────────────────────────────────┐
+│  ← Search                  ✕   │
+│                                 │
+│  ┌─────────────────────────┐   │
+│  │ 🔍 python variables     │   │  ← Active search input
+│  └─────────────────────────┘   │
+│                                 │
+│  Recent Searches                │
+│  • python basics        ✕      │
+│  • javascript for loops  ✕     │
+│                                 │
+│  ── Results (12) ──────────────│
+│  [Course grid or list view]     │
+│                                 │
+│  Filter: [Beginner ✕] [Free ✕] │  ← Active filter chips
+│                                 │
+│  Sort: Most Popular ▾           │
+└─────────────────────────────────┘
+```
+
+---
+
+## Design Notes
+
+### Course Thumbnail
+- Aspect ratio: 16:9
+- Size: 400×225px (2x for HiDPI: 800×450px)
+- Must include: Title overlay, animated preview on hover/long press
+- Background: Gradient based on primary course color
+
+### Filtering & Discovery
+- Categories displayed as horizontally scrollable chips
+- No more than 8 visible categories before "More..." collapse
+- Search uses Supabase full-text search on title + tags + description
+
+### Infinite Scroll
+- `infinite_scroll_pagination` with page size of 12
+- Shimmer loading for skeleton state
+- Empty state: Illustration + "No courses found. Try a different search."
